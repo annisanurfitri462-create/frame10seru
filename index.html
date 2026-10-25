@@ -238,5 +238,25 @@ addEventListener('keydown',e=>{if(e.key!='Enter'&&e.key!=' ')return;const t=e.ta
 if(t.classList&&t.classList.contains('src')){e.preventDefault();const i=empty(-1);if(i>=0){put(i,Q.tr||Q.e);draw()}}
 else if(t.classList&&t.classList.contains('ct')){e.preventDefault();del(+t.dataset.i);draw()}});
 </script>
+  <script type="module">
+  // Import fungsi yang dibutuhkan dari Firebase SDK
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+  // Konfigurasi Firebase milikmu
+  const firebaseConfig = {
+    apiKey: "AIzaSyBHt4JrWTy36yHeCaxMg8Xu_9MFPcZ5yrs",
+    authDomain: "frame-sepuluh-seru-bd775.firebaseapp.com",
+    projectId: "frame-sepuluh-seru-bd775",
+    storageBucket: "frame-sepuluh-seru-bd775.firebasestorage.app",
+    messagingSenderId: "780709103856",
+    appId: "1:780709103856:web:2ac00d4d9905d2dab75a35"
+  };
+
+  // Inisialisasi Firebase & Auth
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  </script>
+  
 </body>
 </html>
