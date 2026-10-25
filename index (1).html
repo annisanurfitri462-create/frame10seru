@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Frame Sepuluh Seru: 32 Level untuk PAUD dan TK</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF4D6;--card:#fff;--ink:#2B2A4C;--mut:#5b5a7e;--coral:#FF6B5B;--sun:#FFC93C;--mint:#2FBF94;--blue:#3D8BFF;--cell:#FFFBEF;--line:#f0dfaa;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1B1A33;--card:#27254A;--ink:#F4F1FF;--mut:#B9B5E0;--cell:#34316A;--line:#403d78;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1B1A33;--card:#27254A;--ink:#F4F1FF;--mut:#B9B5E0;--cell:#34316A;--line:#403d78;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.5 Nunito,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+main{max-width:720px;margin:0 auto;padding:14px}
+h1,h2,h3{font-family:"Baloo 2",system-ui,sans-serif;line-height:1.1;margin:0 0 6px}
+h1{font-size:2rem;font-weight:800}h2{font-size:1.5rem;font-weight:800}h3{font-size:1.15rem;font-weight:600}
+.mut{color:var(--mut)}p{margin:0 0 8px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,.src:focus-visible,.ct:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+#snd,#back{border:2px solid var(--ink);background:var(--card);border-radius:14px;padding:8px 14px;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.lc{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px;padding:12px;border-radius:18px;border:3px solid var(--ink);background:var(--card)}
+.lc b{font:800 2rem "Baloo 2",sans-serif;color:#1B1A33;background:var(--sun);border-radius:12px;padding:0 14px;line-height:1.3}
+.lc:nth-child(3n+2) b{background:var(--mint)}.lc:nth-child(3n) b{background:var(--coral)}
+.lc span{font-weight:700;line-height:1.2}.lc small{color:var(--mut)}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:20px;padding:14px;margin:12px 0}
+.say{font:800 1.35rem/1.25 "Baloo 2",sans-serif;text-align:center;min-height:2.6em}
+.frames{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:6px 0}
+.frame{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:6px;background:var(--ink);border-radius:12px;width:min(100%,260px)}
+.frame.sm{width:min(46%,150px)}
+.cell{aspect-ratio:1;background:var(--cell);border-radius:6px;display:grid;place-items:center;font-size:clamp(20px,7vw,32px)}
+.sm .cell{font-size:19px}
+.ct{display:block;line-height:1;cursor:grab;user-select:none;touch-action:none}
+.pop{animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(0) rotate(-40deg)}70%{transform:scale(1.35)}100%{transform:scale(1)}}
+.shake{animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.ghost{position:fixed;pointer-events:none;font-size:46px;transform:translate(-50%,-50%) scale(1.2);z-index:60}
+.cnt{font:800 1.6rem "Baloo 2",sans-serif;text-align:center}
+.tray{display:flex;align-items:center;justify-content:center;gap:12px;min-height:70px}
+.src{font-size:46px;line-height:1;padding:6px 14px;border:3px dashed var(--ink);border-radius:18px;background:var(--cell);cursor:grab;touch-action:none;user-select:none}
+.fb{min-height:2.2em;text-align:center;font-weight:700}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.go{flex:1;min-width:130px;font:800 1.2rem "Baloo 2",sans-serif;padding:12px;border-radius:16px;border:3px solid var(--ink);background:var(--sun);color:#1B1A33}
+.go.alt{background:var(--card);color:var(--ink)}
+.bar{height:12px;border-radius:8px;background:var(--line);overflow:hidden;margin-bottom:8px}.bar div{height:100%;background:var(--mint);transition:width .4s}
+.cf{position:fixed;top:-30px;font-size:28px;pointer-events:none;z-index:70;animation:fall 1.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+details{margin-top:8px}summary{cursor:pointer;font-weight:700}
+input{font:inherit;padding:10px 12px;border:3px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);flex:1;min-width:140px}
+.lc.lock{opacity:.55}.lc.lock b{background:var(--line);color:var(--ink)}
+.mg{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:6px 0;border-top:1px dashed var(--line)}.mg button{border:2px solid var(--ink);background:var(--card);border-radius:10px;padding:4px 10px;font-weight:700}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><h1>Frame Sepuluh Seru</h1><button id="snd" aria-pressed="true" aria-label="Suara">🔊</button></div>
+<p class="mut">Modul dan permainan 32 level untuk PAUD dan TK A/B. Geser benda ke frame dengan jari atau kursor.</p>
+
+<section id="login">
+<div class="card"><h3>Masuk atau daftar</h3>
+<p class="mut">Pakai nama panggilan, bukan nama lengkap.</p>
+<div class="row"><input id="nm" maxlength="14" placeholder="Nama pengguna" autocomplete="username"></div>
+<div class="row" style="margin-top:8px"><input id="pw" type="password" maxlength="40" placeholder="Kata sandi (minimal 6)" autocomplete="current-password"></div>
+<div class="row" style="margin-top:8px"><button class="go" id="log">Masuk</button><button class="go alt" id="reg">Daftar akun baru</button></div>
+<p class="fb" id="pm" aria-live="polite"></p></div>
+</section>
+<section id="home" hidden>
+<div class="row" style="align-items:center;justify-content:space-between"><b id="who"></b><button class="go alt" id="out" style="flex:none;min-width:0;padding:6px 14px;font-size:1rem">Ganti pemain</button></div>
+<div class="grid" id="grid"></div>
+<div class="card"><h3>Papan peringkat 🏆</h3><div id="lb"></div></div>
+<div class="card" id="tp" hidden><h3>Kelola pemain</h3><div id="mg"></div></div>
+<div class="card"><h3>Cara bermain</h3>
+<p>Pilih level. Tonton contoh yang bergerak sendiri, lalu latihan 5 soal. Geser benda ke dalam frame, atau ketuk. Ketuk atau geser keluar untuk mengambil benda. Tekan Cek jika sudah yakin. Level berikutnya terbuka jika semua 5 soal benar pada percobaan pertama (nilai 100).</p>
+<p class="mut">Panduan guru ada di setiap level. Gunakan benda nyata dulu, misalnya biji atau tutup botol, sebelum bermain.</p></div>
+</section>
+
+<section id="lvl" hidden>
+<button id="back">‹ Semua level</button>
+<h2 id="lt" style="margin-top:10px"></h2>
+<p id="ld" class="mut"></p>
+<div class="card">
+<div class="bar" id="bar" hidden><div></div></div>
+<p class="say" id="lx" aria-live="polite"></p>
+<div class="frames" id="fr"></div>
+<p class="cnt" id="cnt"></p>
+<div class="tray" id="tray"></div>
+<p class="fb" id="fb" aria-live="polite"></p>
+<div class="row">
+<button class="go alt" id="rep">Putar ulang contoh</button>
+<button class="go" id="start">Mulai latihan</button>
+<button class="go" id="chk" hidden>Cek jawaban</button>
+<button class="go" id="nxt" hidden>Lanjut</button>
+<button class="go alt" id="nl" hidden>Level berikutnya</button>
+</div>
+<details><summary>Panduan guru</summary><p id="tip" style="margin-top:6px"></p></details>
+</div>
+</section>
+</main>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,deleteDoc,updateDoc,collection,query,orderBy,limit,getDocs} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+const fb=initializeApp({apiKey:"AIzaSyBHt4JrWTy36yHeCaxMg8Xu_9MFPcZ5yrs",authDomain:"frame-sepuluh-seru-bd775.firebaseapp.com",projectId:"frame-sepuluh-seru-bd775",storageBucket:"frame-sepuluh-seru-bd775.firebasestorage.app",messagingSenderId:"780709103856",appId:"1:780709103856:web:2ac00d4d9905d2dab75a35"});
+const $=s=>document.querySelector(s),R=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),sl=ms=>new Promise(r=>setTimeout(r,ms));
+const E=['🍎','🐥','🍓','🐟','⭐','🚗','🐞','🍪'];
+const LV=[
+['Mengenal dan menaruh','PAUD','Menghitung 1 sampai 10: satu benda untuk satu kotak.','Pakai biji atau tutup botol. Hitung bersama sambil menunjuk. Dua jari boleh dipakai sebagai bantuan.'],
+['Menambah dasar','TK A/B','Menggabungkan dua kelompok benda sampai 10.','Buat cerita: ada 3 apel, ibu memberi 2 apel lagi. Minta anak menghitung dari awal, lalu dari angka pertama.'],
+['Mengurangi dasar','TK A/B','Mengambil sebagian benda dari kelompok.','Cerita: ada 5 burung, 2 terbang. Minta anak menunjuk yang terbang, lalu menghitung sisanya.'],
+['Campur tambah dan kurang','TK A/B','Memilih tambah atau kurang dari cerita.','Tanya dulu: bendanya bertambah atau berkurang? Baru hitung.'],
+['Pasangan sepuluh','TK A/B','Melengkapi angka sampai 10.','Tanya: berapa kotak yang masih kosong? Itu pasangan sepuluhnya.'],
+['Mengurangi dari 10','TK A/B','10 dikurangi angka kecil, hasilnya di bawah 10.','Mulai dari frame penuh. Ambil benda, lalu hitung kotak yang masih terisi.'],
+['Penjumlahan 10 sampai 20','TK A/B','Satu frame penuh ditambah frame kedua.','Selalu isi frame pertama sampai penuh, baru frame kedua. Katakan: sepuluh dan sekian.'],
+['Pengurangan 10 sampai 20','TK A/B','Mengambil benda dari kelompok 11 sampai 20.','Ambil dulu sampai frame pertama penuh, lalu ambil sisanya.'],
+['Mengurangi di bawah 20','TK A/B','Mulai dari 20 benda, ambil sedikit, hasilnya di bawah 20.','Dua frame penuh. Tanya: berapa kotak yang kosong sekarang?'],
+['Campuran 10 sampai 20','TK A/B','Tambah dan kurang pada angka 10 sampai 20.','Tanya dulu: bendanya bertambah atau berkurang?'],
+['Penjumlahan 20 sampai 30','TK A/B','Menambah pada angka 20 sampai 30 dengan tiga frame.','Hitung frame penuh dulu: 10, 20. Lalu tambah satuannya.'],
+['Pengurangan 20 sampai 30','TK A/B','Mengambil benda dari kelompok 21 sampai 30.','Ambil sampai frame terakhir kosong, lalu lanjutkan ke frame sebelumnya.'],
+['Mengurangi di bawah 30','TK A/B','Mulai dari 30 benda, ambil sedikit.','Hitung frame penuh dengan loncat 10, 20, lalu tambah sisanya.'],
+['Campuran 20 sampai 30','TK A/B','Tambah dan kurang pada angka 20 sampai 30.','Minta anak menceritakan soal dengan kata-katanya sendiri.'],
+['Penjumlahan 30 sampai 40','TK A/B','Menambah pada angka 30 sampai 40 dengan empat frame.','Hitung frame penuh dengan loncat: 10, 20, 30. Lalu tambah satuannya.'],
+['Pengurangan 30 sampai 40','TK A/B','Mengambil benda dari kelompok 31 sampai 40.','Ambil dari frame terakhir dulu. Hitung sisanya dengan loncat 10.'],
+['Mengurangi di bawah 40','TK A/B','Mulai dari 40 benda, ambil sedikit.','Tanya: berapa frame yang masih penuh, berapa kotak sisanya?'],
+['Campuran 30 sampai 40','TK A/B','Tambah dan kurang pada angka 30 sampai 40.','Tanya dulu: bertambah atau berkurang? Lalu perkirakan jawabannya.'],
+['Penjumlahan 40 sampai 50','TK A/B','Menambah pada angka 40 sampai 50 dengan lima frame.','Hitung loncat 10, 20, 30, 40, lalu tambah satuannya.'],
+['Pengurangan 40 sampai 50','TK A/B','Mengambil benda dari kelompok 41 sampai 50.','Ajak anak memperkirakan hasil sebelum mengambil benda.'],
+['Mengurangi di bawah 50','TK A/B','Mulai dari 50 benda, ambil sedikit.','Lima frame penuh. Hitung frame yang masih penuh, lalu sisanya.'],
+['Campuran 40 sampai 50','TK A/B','Tambah dan kurang pada angka 40 sampai 50.','Minta anak menjelaskan caranya sebelum menekan Cek.'],
+['Tantangan campuran 10 sampai 50','TK A/B','Level tersulit: tambah lalu kurang dalam satu soal, angka 10 sampai 50.','Kerjakan dua langkah: tambah dulu, lalu ambil. Beri waktu berpikir dan jangan terburu-buru.']];
+const ORD=[0,1,2,3,'p5','p10',5,6,7,8,'p15','p20',9,10,11,12,'p25','p30',13,14,15,16,'p35','p40',17,18,19,20,'p45','p50',21,22];
+const LB=['1','2','3','4','5A','5B','6','7','8','9','9A','9B','10','11','12','13','13A','13B','14','15','16','17','17A','17B','18','19','20','21','21A','21B','22','23'];
+const info=i=>{const o=ORD[i];if(typeof o=='string'){const n=+o.slice(1);return['Pasangan '+n,'TK A/B','Melengkapi angka sampai '+n+'.','Tanya: sekarang ada berapa? Kurang berapa lagi sampai '+n+'?'+(n>10?' Hitung frame penuh dengan loncat 10.':' Tunjuk kotak kosong satu per satu.')]}return LV[o]};
+let on=true,AC,bgT=0,lv,Q,cells=[],qi,sc,tries,mode='demo',tok=0,last=-1,drag,lock=false;
+/* suara */
+function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume();return AC}
+function tone(f,d,ty='sine',v=.2,t0=0,f2){if(!on)return;try{const c=ac(),o=c.createOscillator(),g=c.createGain(),t=c.currentTime+t0;o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d)}catch(e){}}
+function noise(t0,d,v){if(!on)return;try{const c=ac(),n=Math.floor(c.sampleRate*d),b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=Math.random()*2-1;const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain(),t=c.currentTime+t0;f.type='bandpass';f.frequency.value=1800;s.buffer=b;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start(t)}catch(e){}}
+const sClick=()=>tone(700,.07,'square',.06,0,380);
+const sPop=n=>tone(330+n*28,.16,'sine',.22,0,520+n*28);
+const sClap=()=>{for(let i=0;i<16;i++)noise(i*.085+Math.random()*.04,.07,.3)};
+const sCheer=()=>[523,659,784,1047].forEach((f,i)=>tone(f,.25,'triangle',.18,i*.11));
+const sOops=()=>{tone(560,.75,'sawtooth',.16,0,110);tone(590,.75,'square',.05,.02,120)};
+function say(t){if(!on)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t));u.lang='id-ID';u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+function bg(){clearInterval(bgT);bgT=0;if(!on)return;const s=[262,330,392,440,392,330,294,349];let k=0;bgT=setInterval(()=>tone(s[k++%8],.5,'triangle',.035),520)}
+$('#snd').onclick=()=>{on=!on;$('#snd').textContent=on?'🔊':'🔇';$('#snd').setAttribute('aria-pressed',on);if(on){sClick();bg()}else{clearInterval(bgT);bgT=0;try{speechSynthesis.cancel()}catch(e){}}};
+addEventListener('pointerdown',()=>{if(on&&!bgT)bg()});
+/* akun dan kemajuan (Firebase) */
+const auth=getAuth(fb),fs=getFirestore(fb);
+let T=false,P=null,cur='',uid='',pn='';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const open_=i=>T||i<=(P?P.max:0);
+const em=u=>u.toLowerCase().replace(/[^a-z0-9]/g,'')+'@pemain.frame10.app';
+const stars=s=>Object.values(s||{}).filter(v=>v==5).length;
+const msg=t=>{$('#pm').textContent=t};
+const save=async()=>{if(!uid||T||!P)return;try{await setDoc(doc(fs,'players',uid),{max:P.max,s:P.s,st:stars(P.s)},{merge:true})}catch(e){}};
+function showLogin(){tok++;P=null;T=false;uid='';cur='';$('#login').hidden=false;$('#home').hidden=true;$('#lvl').hidden=true;msg('');$('#pw').value=''}
+async function loadMe(u){uid=u.uid;const r=doc(fs,'players',uid);let d=await getDoc(r);
+if(!d.exists()){await setDoc(r,{nama:pn||(u.email||'pemain').split('@')[0],max:0,s:{},st:0,guru:false});d=await getDoc(r)}
+const x=d.data();P={max:x.max||0,s:x.s||{}};T=x.guru===true;cur=x.nama||'pemain';pn='';enter()}
+function enter(){tok++;$('#login').hidden=true;$('#lvl').hidden=true;$('#home').hidden=false;$('#who').textContent=T?'Mode guru: semua level terbuka':'Halo, '+cur+'!';$('#out').textContent='Keluar';$('#tp').hidden=!T;renderGrid();if(T)manage();scrollTo(0,0)}
+function renderGrid(){$('#grid').innerHTML=ORD.map((o,i)=>{const l=info(i),lk=!open_(i),d=!T&&P&&P.s[i]==5;return`<button class="lc${lk?' lock':''}" data-i="${i}"><b>${lk?'\u{1F512}':LB[i]}</b><span>${l[0]}</span><small>${lk?'Terkunci':d?'Selesai \u2B50':l[1]}</small></button>`}).join('');
+document.querySelectorAll('.lc[data-i]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(!open_(i)){sOops();b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),500);return}sClick();openLv(i)});board()}
+async function board(){try{const q=await getDocs(query(collection(fs,'players'),orderBy('st','desc'),limit(30)));
+const n=q.docs.map(d=>({id:d.id,...d.data()})).filter(x=>!x.guru).sort((a,b)=>(b.st||0)-(a.st||0)||(b.max||0)-(a.max||0)).slice(0,10);
+$('#lb').innerHTML=n.length?n.map((r,i)=>`<div class="mg" style="display:block"><div style="display:flex;justify-content:space-between;gap:8px"><span>${['\u{1F947}','\u{1F948}','\u{1F949}'][i]||(i+1)+'.'} <b>${esc(r.nama||'?')}</b>${r.id==uid?' (kamu)':''}</span><span>Level ${LB[Math.min(r.max||0,LB.length-1)]}, \u2B50 ${r.st||0}</span></div><div class="bar" style="margin:4px 0 0"><div style="width:${Math.round((r.max||0)/(ORD.length-1)*100)}%"></div></div></div>`).join(''):'<p class="mut">Belum ada pemain.</p>'}catch(e){$('#lb').innerHTML='<p class="mut">Papan peringkat belum bisa dimuat.</p>'}}
+async function manage(){try{const q=await getDocs(query(collection(fs,'players'),orderBy('st','desc'),limit(100)));
+$('#mg').innerHTML=q.docs.filter(d=>!d.data().guru).map(d=>{const x=d.data();return`<div class="mg"><span>${esc(x.nama||'?')}: level terbuka ${(x.max||0)+1}</span><span><button data-k="r" data-u="${d.id}">Reset</button> <button data-k="d" data-u="${d.id}">Hapus</button></span></div>`}).join('')||'<p class="mut">Belum ada pemain.</p>';
+document.querySelectorAll('#mg button').forEach(b=>b.onclick=async()=>{if(!b.dataset.c){b.dataset.c=1;b.textContent='Yakin?';return}const r=doc(fs,'players',b.dataset.u);try{if(b.dataset.k=='d')await deleteDoc(r);else await updateDoc(r,{max:0,s:{},st:0})}catch(e){}manage();board()})}catch(e){$('#mg').innerHTML='<p class="mut">Gagal memuat daftar.</p>'}}
+$('#log').onclick=async()=>{const n=$('#nm').value.trim(),p=$('#pw').value;if(!n||!p){msg('Isi nama dan kata sandi.');return}sClick();msg('Memeriksa...');try{await signInWithEmailAndPassword(auth,em(n),p)}catch(e){sOops();msg('Nama atau kata sandi salah.')}};
+$('#reg').onclick=async()=>{const n=$('#nm').value.trim().slice(0,14),p=$('#pw').value;if(em(n).length<22){msg('Nama minimal 3 huruf atau angka.');return}if(p.length<6){msg('Kata sandi minimal 6 karakter.');return}sClick();msg('Membuat akun...');pn=n;try{await createUserWithEmailAndPassword(auth,em(n),p)}catch(e){pn='';sOops();msg(e.code=='auth/email-already-in-use'?'Nama ini sudah dipakai. Pilih nama lain atau tekan Masuk.':'Gagal mendaftar. Periksa internet lalu coba lagi.')}};
+$('#pw').onkeydown=e=>{if(e.key=='Enter')$('#log').click()};
+$('#out').onclick=()=>{sClick();signOut(auth)};
+onAuthStateChanged(auth,u=>{if(u)loadMe(u).catch(()=>{msg('Gagal memuat data. Periksa internet.');signOut(auth)});else showLogin()});
+/* soal */
+const arr=(F,n,em)=>Array.from({length:F*10},(_,i)=>i<n?em:'');
+function mk(l,i){let e=E[R(0,7)],e2=E[R(0,7)],a,b,t,n,q;while(e2==e)e2=E[R(0,7)];
+const add=()=>{a=R(1,5);b=R(1,10-a);return{F:1,init:arr(1,a,e),e,tr:e2,target:a+b,text:`${a} ${e} ditambah ${b} ${e2}. Pindahkan ${b} ${e2} ke frame!`,eq:`${a} + ${b} = ${a+b} 🎉`}};
+const sub=()=>{a=R(3,10);b=R(1,a-1);return{F:1,init:arr(1,a,e),e,tr:null,target:a-b,text:`Ada ${a} ${e}. Ambil keluar ${b} ${e}!`,eq:`${a} − ${b} = ${a-b} 🎉`}};
+if(typeof l=='string'){const N=+l.slice(1),F=Math.ceil(N/10);b=R(1,Math.min(9,N-1));a=N-b;return{F,init:arr(F,a,e),e,tr:e2,target:N,text:`${a} + ? = ${N}. Isi sampai jadi ${N}!`,eq:`${a} + ${b} = ${N} 🎉`}}
+if(l==0){n=R(1,i<3?5:10);return{F:1,init:arr(1,0,e),e,tr:e,target:n,text:`Taruh ${n} ${e} di dalam frame.`,eq:`${n} ${e} 🎉`}}
+if(l==1)return add();if(l==2)return sub();if(l==3)return R(0,1)?add():sub();
+if(l==4){a=R(1,9);return{F:1,init:arr(1,a,e),e,tr:e2,target:10,text:`${a} + ? = 10. Isi sampai frame penuh!`,eq:`${a} + ${10-a} = 10 🎉`}}
+if(l==5){b=R(1,9);return{F:1,init:arr(1,10,e),e,tr:null,target:10-b,text:`10 − ${b} = ? Ambil keluar ${b} ${e}.`,eq:`10 − ${b} = ${10-b} 🎉`}}
+if(l==6){if(R(0,1)){n=R(1,9);return{F:2,init:arr(2,10,e),e,tr:e2,target:10+n,text:`10 + ${n} = ? Taruh ${n} ${e2} di frame kedua.`,eq:`10 + ${n} = ${10+n} 🎉`}}
+a=R(6,9);b=R(11-a,9);return{F:2,init:arr(2,a,e),e,tr:e2,target:a+b,text:`${a} + ${b} = ? Isi frame pertama sampai penuh dulu.`,eq:`${a} + ${b} = ${a+b} 🎉`}}
+let r,k;if(l==22){r=R(1,4);const lo=r*10,hi=lo+10;a=R(lo,hi-1);b=R(1,Math.min(9,hi-a));const c=R(1,Math.min(9,a+b-1));return{F:hi/10,init:arr(hi/10,a,e),e,tr:e2,target:a+b-c,text:`${a} + ${b} − ${c} = ? Tambah ${b} ${e2}, lalu ambil ${c}.`,eq:`${a} + ${b} − ${c} = ${a+b-c} 🎉`}}
+if(l<10){r=1;k=['sub','below','mix'][l-7]}else{r=2+Math.floor((l-10)/4);k=['add','sub','below','mix'][(l-10)%4]}
+if(k=='mix')k=R(0,1)?'add':'sub';
+const lo=r*10,hi=lo+10,F=hi/10;
+if(k=='add'){a=R(lo,hi-1);b=R(1,Math.min(9,hi-a));return{F,init:arr(F,a,e),e,tr:e2,target:a+b,text:`${a} + ${b} = ? Tambahkan ${b} ${e2}.`,eq:`${a} + ${b} = ${a+b} 🎉`}}
+if(k=='sub'){a=R(lo+1,hi);b=R(1,9);return{F,init:arr(F,a,e),e,tr:null,target:a-b,text:`${a} − ${b} = ? Ambil keluar ${b} ${e}.`,eq:`${a} − ${b} = ${a-b} 🎉`}}
+b=R(1,9);return{F,init:arr(F,hi,e),e,tr:null,target:hi-b,text:`${hi} − ${b} = ? Ambil keluar ${b} ${e}.`,eq:`${hi} − ${b} = ${hi-b} 🎉`}}
+const cnt=()=>cells.filter(Boolean).length;
+function draw(){let h='';for(let f=0;f<Q.F;f++){h+=`<div class="frame${Q.F>2?' sm':''}">`;for(let k=0;k<10;k++){const i=f*10+k,c=cells[i];h+=`<div class="cell" data-i="${i}">${c?`<span class="ct${i==last?' pop':''}" data-i="${i}" tabindex="0">${c}</span>`:''}</div>`}h+='</div>'}
+$('#fr').innerHTML=h;$('#cnt').textContent='Ada: '+cnt();
+$('#tray').innerHTML=mode=='play'?`<div class="src" tabindex="0" role="button" aria-label="Tambah benda ke frame">${Q.tr||Q.e}</div><span class="mut">${Q.tr?'Seret ke frame atau ketuk':'Terambil terlalu banyak? Seret ke frame untuk menambah lagi'}</span>`:''}
+function ui(){const p=mode=='play',d=mode=='demo';$('#rep').hidden=!d;$('#start').hidden=!d;$('#chk').hidden=!(p&&!lock);$('#nxt').hidden=!(p&&lock);$('#nl').hidden=mode!='end'||lv>=ORD.length-1||(!T&&sc<5);$('#bar').hidden=!p;if(mode=='end'){$('#start').hidden=false;$('#start').textContent='Main lagi'}else $('#start').textContent='Mulai latihan'}
+/* contoh bergerak */
+async function demo(){const my=++tok;mode='demo';lock=false;Q=mk(ORD[lv],0);cells=[...Q.init];last=-1;ui();$('#fb').textContent='';$('#lx').textContent='Contoh: '+Q.text;draw();await sl(1100);
+const c0=cnt(),up=Q.target>c0,idx=[];
+if(up){for(let i=0;i<cells.length&&idx.length<Q.target-c0;i++)if(!cells[i])idx.push(i)}else{for(let i=cells.length-1;i>=0&&idx.length<c0-Q.target;i--)if(cells[i])idx.push(i)}
+for(const i of idx){if(my!=tok)return;cells[i]=up?(Q.tr||Q.e):'';last=i;sPop(cnt());draw();say(cnt());await sl(900)}
+if(my!=tok)return;$('#lx').textContent=Q.eq;sCheer();$('#fb').textContent='Sekarang giliranmu! Tekan Mulai latihan.'}
+function openLv(i){if(!open_(i))return;lv=i;$('#home').hidden=true;$('#lvl').hidden=false;const l=info(i);$('#lt').textContent=`Level ${LB[i]}: ${l[0]}`;$('#ld').textContent=`${l[1]}. ${l[2]}`;$('#tip').textContent=l[3];scrollTo(0,0);demo()}
+function nextQ(){mode='play';lock=false;Q=mk(ORD[lv],qi);cells=[...Q.init];tries=0;last=-1;$('#lx').textContent=Q.text;$('#fb').textContent='';$('#bar div').style.width=qi/5*100+'%';ui();draw()}
+function conf(){for(let i=0;i<20;i++){const s=document.createElement('span');s.className='cf';s.textContent=['🎉','⭐','🎈','✨'][i%4];s.style.left=R(2,94)+'%';s.style.animationDelay=Math.random()*.5+'s';document.body.append(s);setTimeout(()=>s.remove(),2600)}}
+$('#chk').onclick=()=>{sClick();const n=cnt(),t=Q.target;
+if(n==t){if(tries==0)sc++;lock=true;sClap();setTimeout(sCheer,500);conf();$('#lx').textContent=Q.eq;$('#fb').textContent='Hebat sekali!';ui()}
+else{tries++;sOops();$('#fr').classList.add('shake');setTimeout(()=>$('#fr').classList.remove('shake'),500);$('#fb').textContent=n<t?`Masih kurang ${t-n}. Coba lagi!`:`Kelebihan ${n-t}. Coba lagi!`}};
+$('#nxt').onclick=()=>{sClick();qi++;if(qi<5)nextQ();else{mode='end';$('#bar div').style.width='100%';$('#lx').textContent=`Selesai! ${sc>=4?'⭐⭐⭐':sc>=2?'⭐⭐':'⭐'} Benar ${sc} dari 5`;let msg=sc==5?'Nilai 100! Sempurna!':'Nilaimu belum 100. Ulangi level ini sampai semua soal benar untuk membuka level berikutnya.';if(P&&!T){P.s[lv]=Math.max(P.s[lv]||0,sc);if(sc==5&&lv==P.max&&lv<ORD.length-1){P.max=lv+1;msg+=' Level baru terbuka! 🔓'}save()}if(T)msg=sc==5?'Nilai 100!':'Mode guru: semua level tetap terbuka.';$('#fb').textContent=msg;$('#fr').innerHTML='';$('#cnt').textContent='';$('#tray').innerHTML='';sClap();ui()}};
+$('#start').onclick=()=>{sClick();tok++;qi=0;sc=0;nextQ()};
+$('#rep').onclick=()=>{sClick();demo()};
+$('#nl').onclick=()=>{sClick();openLv(lv+1)};
+$('#back').onclick=()=>{sClick();tok++;$('#lvl').hidden=true;$('#home').hidden=false;renderGrid()};
+
+/* geser dan ketuk */
+function empty(f){const lo=f>=0?f*10:0,hi=f>=0?lo+10:cells.length;for(let i=lo;i<hi;i++)if(!cells[i])return i;for(let i=0;i<cells.length;i++)if(!cells[i])return i;return -1}
+function put(i,em){cells[i]=em;last=i;sPop(cnt());say(cnt())}
+function del(i){cells[i]='';last=-1;tone(260,.12,'sine',.18,0,160);say(cnt())}
+addEventListener('pointerdown',e=>{const t=e.target.closest('.ct,.src');if(!t||mode!='play'||lock)return;e.preventDefault();drag={from:t.classList.contains('src')?-1:+t.dataset.i,x:e.clientX,y:e.clientY,em:t.textContent,g:null}});
+addEventListener('pointermove',e=>{if(!drag)return;if(!drag.g&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>8){const g=document.createElement('div');g.className='ghost';g.textContent=drag.em;document.body.append(g);drag.g=g;if(drag.from>=0){cells[drag.from]='';last=-1;draw()}}
+if(drag&&drag.g){drag.g.style.left=e.clientX+'px';drag.g.style.top=e.clientY+'px'}});
+addEventListener('pointerup',e=>{if(!drag)return;const d=drag;drag=null;
+if(!d.g){if(d.from<0){const i=empty(-1);if(i>=0)put(i,d.em)}else del(d.from)}
+else{const el=document.elementFromPoint(e.clientX,e.clientY),c=el&&el.closest('.cell');d.g.remove();
+if(c){let i=+c.dataset.i;if(cells[i])i=empty(Math.floor(i/10));if(i>=0)put(i,d.em);else if(d.from>=0)cells[d.from]=d.em}
+else if(d.from>=0)del(d.from)}
+draw()});
+addEventListener('pointercancel',()=>{if(drag){if(drag.g)drag.g.remove();drag=null;if(mode=='play')draw()}});
+addEventListener('keydown',e=>{if(e.key!='Enter'&&e.key!=' ')return;const t=e.target;if(mode!='play'||lock)return;
+if(t.classList&&t.classList.contains('src')){e.preventDefault();const i=empty(-1);if(i>=0){put(i,Q.tr||Q.e);draw()}}
+else if(t.classList&&t.classList.contains('ct')){e.preventDefault();del(+t.dataset.i);draw()}});
+</script>
+</body>
+</html>
