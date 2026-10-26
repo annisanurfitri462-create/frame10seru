@@ -53,6 +53,8 @@ details{margin-top:8px}summary{cursor:pointer;font-weight:700}
 input{font:inherit;padding:10px 12px;border:3px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);flex:1;min-width:140px}
 .lc.lock{opacity:.55}.lc.lock b{background:var(--line);color:var(--ink)}
 .mg{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:6px 0;border-top:1px dashed var(--line)}.mg button{border:2px solid var(--ink);background:var(--card);border-radius:10px;padding:4px 10px;font-weight:700}
+.rd{display:flex;align-items:center;gap:10px;margin:6px 0;font-weight:700}.rd input{flex:none;min-width:0;width:22px;height:22px;padding:0}
+.lnk{background:none;border:none;color:var(--blue);font-weight:800;text-decoration:underline;padding:6px}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -60,20 +62,40 @@ input{font:inherit;padding:10px 12px;border:3px solid var(--ink);border-radius:1
 <body>
 <main>
 <div class="top"><h1>Frame Sepuluh Seru</h1><button id="snd" aria-pressed="true" aria-label="Suara">🔊</button></div>
+<p id="sk" style="margin:0;font-weight:700"></p>
 <p class="mut">Modul dan permainan 32 level untuk PAUD dan TK A/B. Geser benda ke frame dengan jari atau kursor.</p>
 
 <section id="login">
-<div class="card"><h3>Masuk atau daftar</h3>
-<p class="mut">Pakai nama panggilan, bukan nama lengkap.</p>
+<div class="card"><h3>Masuk</h3>
 <div class="row"><input id="nm" maxlength="14" placeholder="Nama pengguna" autocomplete="username"></div>
-<div class="row" style="margin-top:8px"><input id="pw" type="password" maxlength="40" placeholder="Kata sandi (minimal 6)" autocomplete="current-password"></div>
-<div class="row" style="margin-top:8px"><button class="go" id="log">Masuk</button><button class="go alt" id="reg">Daftar akun baru</button></div>
-<p class="fb" id="pm" aria-live="polite"></p></div>
+<div class="row" style="margin-top:8px"><input id="pw" type="password" maxlength="40" placeholder="Kata sandi" autocomplete="current-password"></div>
+<div class="row" style="margin-top:8px"><button class="go" id="log">Masuk</button></div>
+<p class="fb" id="pm" aria-live="polite"></p>
+<p style="text-align:center;margin:0">Belum punya akun? <button class="lnk" id="kd">Daftar di sini</button></p></div>
+</section>
+<section id="daftar" hidden>
+<div class="card"><h3>Daftar akun baru</h3>
+<p class="mut">Butuh kode dari guru. Pakai nama panggilan, bukan nama lengkap.</p>
+<div class="row"><input id="nm2" maxlength="14" placeholder="Nama pengguna" autocomplete="username"></div>
+<div class="row" style="margin-top:8px"><input id="pw2" type="password" maxlength="40" placeholder="Kata sandi (minimal 6)" autocomplete="new-password"></div>
+<p style="margin:12px 0 4px"><b>Saya mendaftar sebagai:</b></p>
+<label class="rd"><input type="radio" name="jenis" value="kelas" checked> Siswa kelas (kode kelas)</label>
+<label class="rd"><input type="radio" name="jenis" value="luar"> Siswa dari luar kelas (kode sekali pakai)</label>
+<label class="rd"><input type="radio" name="jenis" value="guru"> Guru lain (kode sekali pakai)</label>
+<div class="row" style="margin-top:8px"><input id="kg" maxlength="20" placeholder="Kode pendaftaran" autocomplete="off"></div>
+<div class="row" style="margin-top:8px"><button class="go" id="reg">Daftar</button><button class="go alt" id="kb">Kembali ke Masuk</button></div>
+<p class="fb" id="pm2" aria-live="polite"></p></div>
 </section>
 <section id="home" hidden>
 <div class="row" style="align-items:center;justify-content:space-between"><b id="who"></b><button class="go alt" id="out" style="flex:none;min-width:0;padding:6px 14px;font-size:1rem">Ganti pemain</button></div>
 <div class="grid" id="grid"></div>
 <div class="card"><h3>Papan peringkat 🏆</h3><div id="lb"></div></div>
+<div class="card" id="ap" hidden><h3>Panel kode (admin)</h3>
+<p class="mut">Kode kelas dipakai banyak siswa kelas Anda dan bisa diganti kapan saja.</p>
+<div class="row"><input id="tk" maxlength="20" placeholder="Kode kelas"><button class="go alt" id="atk" style="flex:none;min-width:0">Acak</button><button class="go" id="stk" style="flex:none;min-width:0">Simpan</button></div>
+<p class="mut" style="margin-top:12px">Kode sekali pakai (satu kode untuk satu orang):</p>
+<div class="row"><button class="go alt" id="mkg">Buat kode guru lain</button><button class="go alt" id="mkl">Buat kode siswa luar kelas</button></div>
+<p class="fb" id="ak"></p><div id="kl"></div></div>
 <div class="card" id="tp" hidden><h3>Kelola pemain</h3><div id="mg"></div></div>
 <div class="card"><h3>Cara bermain</h3>
 <p>Pilih level. Tonton contoh yang bergerak sendiri, lalu latihan 5 soal. Geser benda ke dalam frame, atau ketuk. Ketuk atau geser keluar untuk mengambil benda. Tekan Cek jika sudah yakin. Level berikutnya terbuka jika semua 5 soal benar pada percobaan pertama (nilai 100).</p>
@@ -105,9 +127,13 @@ input{font:inherit;padding:10px 12px;border:3px solid var(--ink);border-radius:1
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,deleteDoc,updateDoc,collection,query,orderBy,limit,getDocs} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-const fb=initializeApp({apiKey:"AIzaSyBHt4JrWTy36yHeCaxMg8Xu_9MFPcZ5yrs",authDomain:"frame-sepuluh-seru-bd775.firebaseapp.com",projectId:"frame-sepuluh-seru-bd775",storageBucket:"frame-sepuluh-seru-bd775.firebasestorage.app",messagingSenderId:"780709103856",appId:"1:780709103856:web:2ac00d4d9905d2dab75a35"});
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,deleteUser} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,deleteDoc,updateDoc,collection,query,orderBy,limit,getDocs,writeBatch} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+/* ===== PENGATURAN SEKOLAH: ganti hanya bagian ini untuk tiap sekolah ===== */
+const NAMA_SEKOLAH='';   /* opsional, contoh: 'SD Harapan Bangsa' */
+const FIREBASE_CONFIG={apiKey:"AIzaSyBHt4JrWTy36yHeCaxMg8Xu_9MFPcZ5yrs",authDomain:"frame-sepuluh-seru-bd775.firebaseapp.com",projectId:"frame-sepuluh-seru-bd775",storageBucket:"frame-sepuluh-seru-bd775.firebasestorage.app",messagingSenderId:"780709103856",appId:"1:780709103856:web:2ac00d4d9905d2dab75a35"};
+/* ===== AKHIR PENGATURAN ===== */
+const fb=initializeApp(FIREBASE_CONFIG);
 const $=s=>document.querySelector(s),R=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),sl=ms=>new Promise(r=>setTimeout(r,ms));
 const E=['🍎','🐥','🍓','🐟','⭐','🚗','🐞','🍪'];
 const LV=[
@@ -152,32 +178,57 @@ function bg(){clearInterval(bgT);bgT=0;if(!on)return;const s=[262,330,392,440,39
 $('#snd').onclick=()=>{on=!on;$('#snd').textContent=on?'🔊':'🔇';$('#snd').setAttribute('aria-pressed',on);if(on){sClick();bg()}else{clearInterval(bgT);bgT=0;try{speechSynthesis.cancel()}catch(e){}}};
 addEventListener('pointerdown',()=>{if(on&&!bgT)bg()});
 /* akun dan kemajuan (Firebase) */
+if(NAMA_SEKOLAH){$('#sk').textContent=NAMA_SEKOLAH;document.title=NAMA_SEKOLAH+' | '+document.title}
 const auth=getAuth(fb),fs=getFirestore(fb);
-let T=false,P=null,cur='',uid='',pn='';
+let T=false,G=false,reg=false,P=null,cur='',uid='',pn='',NM={};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
-const open_=i=>T||i<=(P?P.max:0);
+const open_=i=>T||G||i<=(P?P.max:0);
 const em=u=>u.toLowerCase().replace(/[^a-z0-9]/g,'')+'@pemain.frame10.app';
 const stars=s=>Object.values(s||{}).filter(v=>v==5).length;
-const msg=t=>{$('#pm').textContent=t};
-const save=async()=>{if(!uid||T||!P)return;try{await setDoc(doc(fs,'players',uid),{max:P.max,s:P.s,st:stars(P.s)},{merge:true})}catch(e){}};
-function showLogin(){tok++;P=null;T=false;uid='';cur='';$('#login').hidden=false;$('#home').hidden=true;$('#lvl').hidden=true;msg('');$('#pw').value=''}
-async function loadMe(u){uid=u.uid;const r=doc(fs,'players',uid);let d=await getDoc(r);
-if(!d.exists()){await setDoc(r,{nama:pn||(u.email||'pemain').split('@')[0],max:0,s:{},st:0,guru:false});d=await getDoc(r)}
-const x=d.data();P={max:x.max||0,s:x.s||{}};T=x.guru===true;cur=x.nama||'pemain';pn='';enter()}
-function enter(){tok++;$('#login').hidden=true;$('#lvl').hidden=true;$('#home').hidden=false;$('#who').textContent=T?'Mode guru: semua level terbuka':'Halo, '+cur+'!';$('#out').textContent='Keluar';$('#tp').hidden=!T;renderGrid();if(T)manage();scrollTo(0,0)}
-function renderGrid(){$('#grid').innerHTML=ORD.map((o,i)=>{const l=info(i),lk=!open_(i),d=!T&&P&&P.s[i]==5;return`<button class="lc${lk?' lock':''}" data-i="${i}"><b>${lk?'\u{1F512}':LB[i]}</b><span>${l[0]}</span><small>${lk?'Terkunci':d?'Selesai \u2B50':l[1]}</small></button>`}).join('');
+const msg=t=>{$('#pm').textContent=t},msg2=t=>{$('#pm2').textContent=t};
+const cl=s=>s.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
+const AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const rnd=n=>{const a=new Uint32Array(n);crypto.getRandomValues(a);return Array.from(a,v=>AL[v%AL.length]).join('')};
+const save=async()=>{if(!uid||T||G||!P)return;try{await setDoc(doc(fs,'players',uid),{max:P.max,s:P.s,st:stars(P.s)},{merge:true})}catch(e){}};
+function page(n){$('#login').hidden=n!='l';$('#daftar').hidden=n!='d'}
+function showLogin(){tok++;P=null;T=false;G=false;uid='';cur='';$('#home').hidden=true;$('#lvl').hidden=true;page('l');msg('');msg2('');$('#pw').value='';$('#pw2').value=''}
+async function loadMe(u){uid=u.uid;const r=doc(fs,'players',uid);const d=await getDoc(r);
+if(!d.exists()){try{await deleteUser(u)}catch(e){await signOut(auth)}setTimeout(()=>{page('l');msg('Akunmu sudah dihapus oleh guru. Daftar lagi dengan kode baru.')},500);return}
+const x=d.data();P={max:x.max||0,s:x.s||{}};T=x.guru===true;G=!T&&x.guruLuar===true;cur=x.nama||'pemain';enter()}
+function enter(){tok++;$('#login').hidden=true;$('#daftar').hidden=true;$('#lvl').hidden=true;$('#home').hidden=false;
+$('#who').textContent=T?'Mode guru utama: semua level terbuka':G?'Guru tamu: '+cur+', semua level terbuka':'Halo, '+cur+'!';$('#out').textContent='Keluar';
+$('#tp').hidden=!T;$('#ap').hidden=!T;renderGrid();if(T)manage().then(panel);scrollTo(0,0)}
+function renderGrid(){$('#grid').innerHTML=ORD.map((o,i)=>{const l=info(i),lk=!open_(i),d=!T&&!G&&P&&P.s[i]==5;return`<button class="lc${lk?' lock':''}" data-i="${i}"><b>${lk?'\u{1F512}':LB[i]}</b><span>${l[0]}</span><small>${lk?'Terkunci':d?'Selesai \u2B50':l[1]}</small></button>`}).join('');
 document.querySelectorAll('.lc[data-i]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(!open_(i)){sOops();b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),500);return}sClick();openLv(i)});board()}
 async function board(){try{const q=await getDocs(query(collection(fs,'players'),orderBy('st','desc'),limit(30)));
-const n=q.docs.map(d=>({id:d.id,...d.data()})).filter(x=>!x.guru).sort((a,b)=>(b.st||0)-(a.st||0)||(b.max||0)-(a.max||0)).slice(0,10);
-$('#lb').innerHTML=n.length?n.map((r,i)=>`<div class="mg" style="display:block"><div style="display:flex;justify-content:space-between;gap:8px"><span>${['\u{1F947}','\u{1F948}','\u{1F949}'][i]||(i+1)+'.'} <b>${esc(r.nama||'?')}</b>${r.id==uid?' (kamu)':''}</span><span>Level ${LB[Math.min(r.max||0,LB.length-1)]}, \u2B50 ${r.st||0}</span></div><div class="bar" style="margin:4px 0 0"><div style="width:${Math.round((r.max||0)/(ORD.length-1)*100)}%"></div></div></div>`).join(''):'<p class="mut">Belum ada pemain.</p>'}catch(e){$('#lb').innerHTML='<p class="mut">Papan peringkat belum bisa dimuat.</p>'}}
-async function manage(){try{const q=await getDocs(query(collection(fs,'players'),orderBy('st','desc'),limit(100)));
-$('#mg').innerHTML=q.docs.filter(d=>!d.data().guru).map(d=>{const x=d.data();return`<div class="mg"><span>${esc(x.nama||'?')}: level terbuka ${(x.max||0)+1}</span><span><button data-k="r" data-u="${d.id}">Reset</button> <button data-k="d" data-u="${d.id}">Hapus</button></span></div>`}).join('')||'<p class="mut">Belum ada pemain.</p>';
-document.querySelectorAll('#mg button').forEach(b=>b.onclick=async()=>{if(!b.dataset.c){b.dataset.c=1;b.textContent='Yakin?';return}const r=doc(fs,'players',b.dataset.u);try{if(b.dataset.k=='d')await deleteDoc(r);else await updateDoc(r,{max:0,s:{},st:0})}catch(e){}manage();board()})}catch(e){$('#mg').innerHTML='<p class="mut">Gagal memuat daftar.</p>'}}
+const n=q.docs.map(d=>({id:d.id,...d.data()})).filter(x=>!x.guru&&!x.guruLuar).sort((a,b)=>(b.st||0)-(a.st||0)||(b.max||0)-(a.max||0)).slice(0,10);
+$('#lb').innerHTML=n.length?n.map((r,i)=>`<div class="mg" style="display:block"><div style="display:flex;justify-content:space-between;gap:8px"><span>${['\u{1F947}','\u{1F948}','\u{1F949}'][i]||(i+1)+'.'} <b>${esc(r.nama||'?')}</b>${r.siswaLuar?' (luar kelas)':''}${r.id==uid?' (kamu)':''}</span><span>Level ${LB[Math.min(r.max||0,LB.length-1)]}, \u2B50 ${r.st||0}</span></div><div class="bar" style="margin:4px 0 0"><div style="width:${Math.round((r.max||0)/(ORD.length-1)*100)}%"></div></div></div>`).join(''):'<p class="mut">Belum ada pemain.</p>'}catch(e){$('#lb').innerHTML='<p class="mut">Papan peringkat belum bisa dimuat.</p>'}}
+async function manage(){try{const q=await getDocs(query(collection(fs,'players'),orderBy('st','desc'),limit(100)));NM={};q.docs.forEach(d=>{NM[d.id]=d.data().nama||'?'});
+$('#mg').innerHTML=q.docs.filter(d=>!d.data().guru).map(d=>{const x=d.data();return`<div class="mg"><span>${esc(x.nama||'?')}${x.guruLuar?' (guru tamu)':x.siswaLuar?' (luar kelas)':''}: level terbuka ${(x.max||0)+1}</span><span><button data-k="r" data-u="${d.id}">Reset</button> <button data-k="d" data-u="${d.id}">Hapus</button></span></div>`}).join('')||'<p class="mut">Belum ada pemain.</p>';
+document.querySelectorAll('#mg button').forEach(b=>b.onclick=async()=>{if(!b.dataset.c){b.dataset.c=1;b.textContent='Yakin?';return}const r=doc(fs,'players',b.dataset.u);try{if(b.dataset.k=='d')await deleteDoc(r);else await updateDoc(r,{max:0,s:{},st:0})}catch(e){}manage().then(panel);board()})}catch(e){$('#mg').innerHTML='<p class="mut">Gagal memuat daftar.</p>'}}
+async function panel(){try{const k=await getDoc(doc(fs,'config','kelas'));$('#tk').value=k.exists()?k.data().kode:''}catch(e){}
+try{const q=await getDocs(query(collection(fs,'kode'),orderBy('dibuat','desc'),limit(50)));
+$('#kl').innerHTML=q.docs.map(d=>{const x=d.data();return`<div class="mg"><span><b>${esc(d.id)}</b> ${x.tipe=='guru'?'guru lain':'siswa luar kelas'}<br><small>${x.dipakai?'Sudah dipakai'+(NM[x.oleh]?' oleh '+esc(NM[x.oleh]):''):'Belum dipakai'}</small></span><span><button data-c="${esc(d.id)}">Salin</button> <button data-x="${esc(d.id)}">Hapus</button></span></div>`}).join('')||'<p class="mut">Belum ada kode sekali pakai.</p>';
+document.querySelectorAll('#kl [data-c]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.c);b.textContent='Tersalin'}catch(e){b.textContent=b.dataset.c}});
+document.querySelectorAll('#kl [data-x]').forEach(b=>b.onclick=async()=>{if(!b.dataset.c){b.dataset.c=1;b.textContent='Yakin?';return}try{await deleteDoc(doc(fs,'kode',b.dataset.x))}catch(e){}panel()})}catch(e){$('#kl').innerHTML='<p class="mut">Daftar kode belum bisa dimuat.</p>'}}
+async function mkKode(t){sClick();const c=rnd(8);try{await setDoc(doc(fs,'kode',c),{tipe:t,dipakai:false,oleh:'',dibuat:Date.now()});$('#ak').textContent='Kode baru: '+c+'. Kirim ke satu orang saja.';await panel()}catch(e){$('#ak').textContent='Gagal membuat kode.'}}
+$('#mkg').onclick=()=>mkKode('guru');$('#mkl').onclick=()=>mkKode('luar');
+$('#atk').onclick=()=>{sClick();$('#tk').value=rnd(10)};
+$('#stk').onclick=async()=>{const v=cl($('#tk').value);if(v.length<6){$('#ak').textContent='Kode kelas minimal 6 huruf atau angka.';return}sClick();try{await setDoc(doc(fs,'config','kelas'),{kode:v});$('#tk').value=v;$('#ak').textContent='Kode kelas disimpan: '+v}catch(e){$('#ak').textContent='Gagal menyimpan kode kelas.'}};
 $('#log').onclick=async()=>{const n=$('#nm').value.trim(),p=$('#pw').value;if(!n||!p){msg('Isi nama dan kata sandi.');return}sClick();msg('Memeriksa...');try{await signInWithEmailAndPassword(auth,em(n),p)}catch(e){sOops();msg('Nama atau kata sandi salah.')}};
-$('#reg').onclick=async()=>{const n=$('#nm').value.trim().slice(0,14),p=$('#pw').value;if(em(n).length<22){msg('Nama minimal 3 huruf atau angka.');return}if(p.length<6){msg('Kata sandi minimal 6 karakter.');return}sClick();msg('Membuat akun...');pn=n;try{await createUserWithEmailAndPassword(auth,em(n),p)}catch(e){pn='';sOops();msg(e.code=='auth/email-already-in-use'?'Nama ini sudah dipakai. Pilih nama lain atau tekan Masuk.':'Gagal mendaftar. Periksa internet lalu coba lagi.')}};
+$('#reg').onclick=async()=>{const n=$('#nm2').value.trim().slice(0,14),p=$('#pw2').value,tp=document.querySelector('input[name=jenis]:checked').value,k=cl($('#kg').value);
+if(em(n).length<22){msg2('Nama minimal 3 huruf atau angka.');return}if(p.length<6){msg2('Kata sandi minimal 6 karakter.');return}if(k.length<6){msg2('Isi kode pendaftaran dari guru.');return}
+sClick();msg2('Membuat akun...');reg=true;
+try{const c=await createUserWithEmailAndPassword(auth,em(n),p),u=c.user;
+try{const b=writeBatch(fs);b.set(doc(fs,'claims',u.uid),{tipe:tp,kode:k});if(tp!='kelas')b.update(doc(fs,'kode',k),{dipakai:true,oleh:u.uid});
+b.set(doc(fs,'players',u.uid),{nama:n,max:0,s:{},st:0,guru:false,guruLuar:tp=='guru',siswaLuar:tp=='luar'});await b.commit()}
+catch(e){try{await deleteUser(u)}catch(_){}reg=false;sOops();setTimeout(()=>{page('d');msg2('Kode salah atau sudah dipakai. Akun belum dibuat, silakan coba lagi.')},500);return}
+reg=false;await loadMe(u)}
+catch(e){reg=false;sOops();msg2(e.code=='auth/email-already-in-use'?'Nama ini sudah dipakai. Pilih nama lain.':'Gagal mendaftar. Periksa internet lalu coba lagi.')}};
+$('#kd').onclick=()=>{sClick();msg('');page('d')};$('#kb').onclick=()=>{sClick();msg2('');page('l')};
 $('#pw').onkeydown=e=>{if(e.key=='Enter')$('#log').click()};
 $('#out').onclick=()=>{sClick();signOut(auth)};
-onAuthStateChanged(auth,u=>{if(u)loadMe(u).catch(()=>{msg('Gagal memuat data. Periksa internet.');signOut(auth)});else showLogin()});
+onAuthStateChanged(auth,u=>{if(u){if(!reg)loadMe(u).catch(()=>{msg('Gagal memuat data. Periksa internet.');signOut(auth)})}else showLogin()});
 /* soal */
 const arr=(F,n,em)=>Array.from({length:F*10},(_,i)=>i<n?em:'');
 function mk(l,i){let e=E[R(0,7)],e2=E[R(0,7)],a,b,t,n,q;while(e2==e)e2=E[R(0,7)];
@@ -201,7 +252,7 @@ const cnt=()=>cells.filter(Boolean).length;
 function draw(){let h='';for(let f=0;f<Q.F;f++){h+=`<div class="frame${Q.F>2?' sm':''}">`;for(let k=0;k<10;k++){const i=f*10+k,c=cells[i];h+=`<div class="cell" data-i="${i}">${c?`<span class="ct${i==last?' pop':''}" data-i="${i}" tabindex="0">${c}</span>`:''}</div>`}h+='</div>'}
 $('#fr').innerHTML=h;$('#cnt').textContent='Ada: '+cnt();
 $('#tray').innerHTML=mode=='play'?`<div class="src" tabindex="0" role="button" aria-label="Tambah benda ke frame">${Q.tr||Q.e}</div><span class="mut">${Q.tr?'Seret ke frame atau ketuk':'Terambil terlalu banyak? Seret ke frame untuk menambah lagi'}</span>`:''}
-function ui(){const p=mode=='play',d=mode=='demo';$('#rep').hidden=!d;$('#start').hidden=!d;$('#chk').hidden=!(p&&!lock);$('#nxt').hidden=!(p&&lock);$('#nl').hidden=mode!='end'||lv>=ORD.length-1||(!T&&sc<5);$('#bar').hidden=!p;if(mode=='end'){$('#start').hidden=false;$('#start').textContent='Main lagi'}else $('#start').textContent='Mulai latihan'}
+function ui(){const p=mode=='play',d=mode=='demo';$('#rep').hidden=!d;$('#start').hidden=!d;$('#chk').hidden=!(p&&!lock);$('#nxt').hidden=!(p&&lock);$('#nl').hidden=mode!='end'||lv>=ORD.length-1||(!T&&!G&&sc<5);$('#bar').hidden=!p;if(mode=='end'){$('#start').hidden=false;$('#start').textContent='Main lagi'}else $('#start').textContent='Mulai latihan'}
 /* contoh bergerak */
 async function demo(){const my=++tok;mode='demo';lock=false;Q=mk(ORD[lv],0);cells=[...Q.init];last=-1;ui();$('#fb').textContent='';$('#lx').textContent='Contoh: '+Q.text;draw();await sl(1100);
 const c0=cnt(),up=Q.target>c0,idx=[];
@@ -214,7 +265,7 @@ function conf(){for(let i=0;i<20;i++){const s=document.createElement('span');s.c
 $('#chk').onclick=()=>{sClick();const n=cnt(),t=Q.target;
 if(n==t){if(tries==0)sc++;lock=true;sClap();setTimeout(sCheer,500);conf();$('#lx').textContent=Q.eq;$('#fb').textContent='Hebat sekali!';ui()}
 else{tries++;sOops();$('#fr').classList.add('shake');setTimeout(()=>$('#fr').classList.remove('shake'),500);$('#fb').textContent=n<t?`Masih kurang ${t-n}. Coba lagi!`:`Kelebihan ${n-t}. Coba lagi!`}};
-$('#nxt').onclick=()=>{sClick();qi++;if(qi<5)nextQ();else{mode='end';$('#bar div').style.width='100%';$('#lx').textContent=`Selesai! ${sc>=4?'⭐⭐⭐':sc>=2?'⭐⭐':'⭐'} Benar ${sc} dari 5`;let msg=sc==5?'Nilai 100! Sempurna!':'Nilaimu belum 100. Ulangi level ini sampai semua soal benar untuk membuka level berikutnya.';if(P&&!T){P.s[lv]=Math.max(P.s[lv]||0,sc);if(sc==5&&lv==P.max&&lv<ORD.length-1){P.max=lv+1;msg+=' Level baru terbuka! 🔓'}save()}if(T)msg=sc==5?'Nilai 100!':'Mode guru: semua level tetap terbuka.';$('#fb').textContent=msg;$('#fr').innerHTML='';$('#cnt').textContent='';$('#tray').innerHTML='';sClap();ui()}};
+$('#nxt').onclick=()=>{sClick();qi++;if(qi<5)nextQ();else{mode='end';$('#bar div').style.width='100%';$('#lx').textContent=`Selesai! ${sc>=4?'⭐⭐⭐':sc>=2?'⭐⭐':'⭐'} Benar ${sc} dari 5`;let msg=sc==5?'Nilai 100! Sempurna!':'Nilaimu belum 100. Ulangi level ini sampai semua soal benar untuk membuka level berikutnya.';if(P&&!T&&!G){P.s[lv]=Math.max(P.s[lv]||0,sc);if(sc==5&&lv==P.max&&lv<ORD.length-1){P.max=lv+1;msg+=' Level baru terbuka! 🔓'}save()}if(T||G)msg=sc==5?'Nilai 100!':'Mode guru: semua level tetap terbuka.';$('#fb').textContent=msg;$('#fr').innerHTML='';$('#cnt').textContent='';$('#tray').innerHTML='';sClap();ui()}};
 $('#start').onclick=()=>{sClick();tok++;qi=0;sc=0;nextQ()};
 $('#rep').onclick=()=>{sClick();demo()};
 $('#nl').onclick=()=>{sClick();openLv(lv+1)};
@@ -238,25 +289,5 @@ addEventListener('keydown',e=>{if(e.key!='Enter'&&e.key!=' ')return;const t=e.ta
 if(t.classList&&t.classList.contains('src')){e.preventDefault();const i=empty(-1);if(i>=0){put(i,Q.tr||Q.e);draw()}}
 else if(t.classList&&t.classList.contains('ct')){e.preventDefault();del(+t.dataset.i);draw()}});
 </script>
-  <script type="module">
-  // Import fungsi yang dibutuhkan dari Firebase SDK
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-  // Konfigurasi Firebase milikmu
-  const firebaseConfig = {
-    apiKey: "AIzaSyBHt4JrWTy36yHeCaxMg8Xu_9MFPcZ5yrs",
-    authDomain: "frame-sepuluh-seru-bd775.firebaseapp.com",
-    projectId: "frame-sepuluh-seru-bd775",
-    storageBucket: "frame-sepuluh-seru-bd775.firebasestorage.app",
-    messagingSenderId: "780709103856",
-    appId: "1:780709103856:web:2ac00d4d9905d2dab75a35"
-  };
-
-  // Inisialisasi Firebase & Auth
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  </script>
-  
 </body>
 </html>
